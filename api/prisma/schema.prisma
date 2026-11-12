@@ -26,6 +26,7 @@ model User {
 model Genre {
   id    String @id @default(uuid())
   name  String @unique
+  description String?
   books Book[]
 }
 
