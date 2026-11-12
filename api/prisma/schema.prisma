@@ -8,14 +8,15 @@ generator client {
 }
 
 enum Role {
-  PATRON
   LIBRARIAN
+  PATRON
 }
 
 model User {
   id        String   @id @default(uuid())
   email     String   @unique
-  name      String
+  password  String
+  name      String?
   role      Role     @default(PATRON)
   reviews   Review[]
   createdAt DateTime @default(now())
@@ -23,22 +24,23 @@ model User {
 }
 
 model Genre {
-  id          String   @id @default(uuid())
-  name        String   @unique
-  description String?
-  books       Book[]
+  id    String @id @default(uuid())
+  name  String @unique
+  books Book[]
 }
 
 model Book {
   id            String   @id @default(uuid())
   title         String
   author        String
-  publishedYear Int
   isbn          String   @unique
+  totalCopies   Int      @default(1)
+  publishedYear Int
   genreId       String
   genre         Genre    @relation(fields: [genreId], references: [id], onDelete: Cascade)
   reviews       Review[]
   createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 model Review {
@@ -50,6 +52,4 @@ model Review {
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
-
-  @@unique([bookId, userId])
 }
