@@ -24,6 +24,7 @@ export declare class BooksService {
             genre: {
                 id: string;
                 name: string;
+                description: string | null;
             };
         } & {
             id: string;
@@ -44,6 +45,7 @@ export declare class BooksService {
         genre: {
             id: string;
             name: string;
+            description: string | null;
         };
         reviews: {
             id: string;

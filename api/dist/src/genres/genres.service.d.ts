@@ -6,6 +6,7 @@ export declare class GenresService {
     create(dto: CreateGenreDto): import(".prisma/client").Prisma.Prisma__GenreClient<{
         id: string;
         name: string;
+        description: string | null;
     }, never, import("@prisma/client/runtime/library").DefaultArgs>;
     findAll(): import(".prisma/client").Prisma.PrismaPromise<({
         books: {
@@ -22,6 +23,7 @@ export declare class GenresService {
     } & {
         id: string;
         name: string;
+        description: string | null;
     })[]>;
     findOne(id: string): Promise<{
         books: {
@@ -38,13 +40,16 @@ export declare class GenresService {
     } & {
         id: string;
         name: string;
+        description: string | null;
     }>;
     update(id: string, dto: UpdateGenreDto): Promise<{
         id: string;
         name: string;
+        description: string | null;
     }>;
     remove(id: string): Promise<{
         id: string;
         name: string;
+        description: string | null;
     }>;
 }

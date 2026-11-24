@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 async function main() {
-    console.log('🌱 Starting database seeding...');
+    console.log(' Starting database seeding...');
     await prisma.review.deleteMany();
     await prisma.book.deleteMany();
     await prisma.genre.deleteMany();
@@ -40,11 +40,11 @@ async function main() {
     for (const book of booksData) {
         await prisma.book.create({ data: book });
     }
-    console.log(`✅ Seeding complete! Successfully added 4 genres and ${booksData.length} books.`);
+    console.log(` Seeding complete! Successfully added 4 genres and ${booksData.length} books.`);
 }
 main()
     .catch((e) => {
-    console.error('❌ Error during seeding:', e);
+    console.error(' Error during seeding:', e);
     process.exit(1);
 })
     .finally(async () => {

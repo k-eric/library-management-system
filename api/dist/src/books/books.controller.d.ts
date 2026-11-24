@@ -19,6 +19,7 @@ export declare class BooksController {
             genre: {
                 id: string;
                 name: string;
+                description: string | null;
             };
         } & {
             id: string;
@@ -39,6 +40,7 @@ export declare class BooksController {
         genre: {
             id: string;
             name: string;
+            description: string | null;
         };
         reviews: {
             id: string;
