@@ -12,10 +12,10 @@ import ReadingListPage from './pages/ReadingListPage.jsx';
 export default function App() {
   return (
     <ReadingListProvider>
-      <div className="min-h-screen bg-purple-50/60 text-base text-slate-900">
+      <div className="min-h-screen bg-slate-50 text-sm text-slate-900">
         <Navbar />
 
-        <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+        <main className="mx-auto max-w-7xl px-4 py-7 sm:px-6">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/books/:id" element={<BookDetail />} />

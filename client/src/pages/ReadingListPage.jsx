@@ -50,16 +50,19 @@ export default function ReadingListPage() {
   };
 
   return (
-    <div className="mx-auto max-w-4xl space-y-6">
-      <section className="flex flex-wrap items-center justify-between gap-4 rounded-2xl bg-purple-700 p-8 text-white shadow-sm">
+    <div className="mx-auto max-w-4xl space-y-5">
+      <section className="flex flex-wrap items-center justify-between gap-4 rounded-xl bg-[#001B5E] p-7 text-white shadow-sm">
         <div>
-          <span className="inline-block rounded-full bg-purple-950/50 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-purple-100">
-            Patron Borrow Queue
-          </span>
-          <h1 className="mt-3 text-3xl font-bold tracking-tight">
-            My Reading List
+          <div className="flex items-center gap-2.5">
+            <span className="h-[2px] w-6 bg-[#D9A528]" />
+            <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#D9A528]">
+              Patron Borrow Queue
+            </span>
+          </div>
+          <h1 className="mt-2.5 text-2xl font-bold tracking-tight sm:text-3xl">
+            My reading <span className="text-[#D9A528]">list.</span>
           </h1>
-          <p className="mt-1.5 text-base font-normal text-purple-100">
+          <p className="mt-1 text-xs font-normal text-slate-200">
             Review selected titles and submit a borrow request when ready.
           </p>
         </div>
@@ -68,7 +71,7 @@ export default function ReadingListPage() {
           <button
             type="button"
             onClick={clearList}
-            className="rounded-xl bg-purple-900 px-4 py-2.5 text-sm font-semibold text-purple-100 transition hover:bg-purple-950"
+            className="rounded-lg border border-white/25 bg-white/10 px-4 py-2 text-xs font-semibold text-white transition hover:bg-white/20"
           >
             Clear List
           </button>
@@ -78,7 +81,7 @@ export default function ReadingListPage() {
       {statusMessage && (
         <div
           role="status"
-          className="rounded-2xl border border-purple-300 bg-purple-50 p-5 text-base font-medium text-purple-950"
+          className="rounded-xl border border-[#D9A528] bg-amber-50/70 p-4 text-sm font-medium text-slate-900"
         >
           {statusMessage}
         </div>
@@ -87,43 +90,43 @@ export default function ReadingListPage() {
       {error && (
         <div
           role="alert"
-          className="rounded-2xl border border-rose-200 bg-rose-50 p-5 text-base font-medium text-rose-800"
+          className="rounded-xl border border-rose-200 bg-rose-50 p-4 text-sm font-medium text-rose-800"
         >
           {error}
         </div>
       )}
 
       {items.length === 0 ? (
-        <div className="rounded-2xl border border-purple-200 bg-white p-12 text-center shadow-sm">
-          <h2 className="text-xl font-bold text-purple-950">
+        <div className="rounded-xl border border-slate-200 bg-white p-10 text-center shadow-sm">
+          <h2 className="text-base font-bold text-[#001B5E]">
             Your reading list is empty
           </h2>
-          <p className="mt-2 text-base text-slate-600">
+          <p className="mt-1.5 text-sm text-slate-600">
             Browse the catalog and add books you want to borrow.
           </p>
           <Link
             to="/"
-            className="mt-6 inline-block rounded-xl bg-purple-700 px-6 py-3 text-sm font-semibold text-white transition hover:bg-purple-800"
+            className="mt-5 inline-block rounded-lg bg-[#001B5E] px-5 py-2.5 text-xs font-semibold text-white transition hover:bg-[#002885]"
           >
             Browse Catalog
           </Link>
         </div>
       ) : (
         <div className="space-y-4">
-          <div className="divide-y divide-purple-100 overflow-hidden rounded-2xl border border-purple-200 bg-white shadow-sm">
+          <div className="divide-y divide-slate-100 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
             {items.map((book) => (
               <div
                 key={book.id}
-                className="flex flex-wrap items-center justify-between gap-4 p-6"
+                className="flex flex-wrap items-center justify-between gap-4 p-5"
               >
                 <div>
                   <Link
                     to={`/books/${book.id}`}
-                    className="text-lg font-bold text-slate-900 transition hover:text-purple-700"
+                    className="text-base font-bold text-slate-900 transition hover:text-[#001B5E]"
                   >
                     {book.title}
                   </Link>
-                  <p className="mt-1 text-sm text-slate-600">
+                  <p className="mt-1 text-xs text-slate-600">
                     by <span className="font-medium text-slate-800">{book.author}</span>
                     {book.isbn ? ` — ISBN ${book.isbn}` : ''}
                   </p>
@@ -132,7 +135,7 @@ export default function ReadingListPage() {
                 <button
                   type="button"
                   onClick={() => removeBook(book.id)}
-                  className="rounded-xl border border-purple-200 bg-purple-50 px-4 py-2 text-sm font-semibold text-purple-900 transition hover:bg-purple-200"
+                  className="rounded-lg border border-slate-300 bg-white px-3.5 py-1.5 text-xs font-semibold text-slate-700 transition hover:border-rose-300 hover:text-rose-700"
                 >
                   Remove
                 </button>
@@ -140,15 +143,15 @@ export default function ReadingListPage() {
             ))}
           </div>
 
-          <div className="flex items-center justify-between rounded-2xl border border-purple-200 bg-white p-6 shadow-sm">
-            <span className="text-base font-semibold text-slate-800">
+          <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+            <span className="text-sm font-semibold text-slate-800">
               {items.length} {items.length === 1 ? 'book' : 'books'} ready to borrow
             </span>
             <button
               type="button"
               disabled={submitting}
               onClick={handleBorrowSubmit}
-              className="rounded-xl bg-purple-700 px-6 py-3 text-sm font-semibold text-white transition hover:bg-purple-800 disabled:bg-purple-400"
+              className="rounded-lg bg-[#001B5E] px-5 py-2.5 text-xs font-semibold text-white transition hover:bg-[#002885] disabled:bg-slate-400"
             >
               {submitting ? 'Submitting Request...' : 'Submit Borrow Request'}
             </button>

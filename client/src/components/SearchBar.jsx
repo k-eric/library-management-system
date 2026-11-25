@@ -13,12 +13,12 @@ export default function SearchBar({ onSearch, initialValue = '' }) {
 
   return (
     <div className="relative w-full">
-      <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+      <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5">
         <svg
-          className="h-5 w-5 text-indigo-500"
+          className="h-4 w-4 text-[#001B5E]"
           fill="none"
           stroke="currentColor"
-          strokeWidth="2.2"
+          strokeWidth="2"
           viewBox="0 0 24 24"
           aria-hidden="true"
         >
@@ -36,14 +36,14 @@ export default function SearchBar({ onSearch, initialValue = '' }) {
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search books by title or author..."
         aria-label="Search books by title or author"
-        className="w-full rounded-2xl border-2 border-indigo-200 bg-white py-3 pl-12 pr-20 text-sm font-medium text-slate-800 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/15"
+        className="w-full rounded-lg border border-slate-300 bg-white py-2.5 pl-10 pr-20 text-sm font-normal text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-[#001B5E] focus:ring-2 focus:ring-[#001B5E]/15"
       />
 
       {query && (
         <button
           type="button"
           onClick={() => setQuery('')}
-          className="absolute inset-y-1.5 right-2 rounded-xl bg-rose-100 px-3 text-xs font-bold text-rose-700 transition hover:bg-rose-200"
+          className="absolute inset-y-1.5 right-1.5 rounded-md bg-slate-100 px-3 text-xs font-semibold text-[#001B5E] transition hover:bg-slate-200"
         >
           Clear
         </button>

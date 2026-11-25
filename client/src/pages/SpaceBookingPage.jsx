@@ -85,7 +85,6 @@ export default function SpaceBookingPage() {
           endTime,
         });
       } else if (response.status === 404) {
-        // Graceful local confirmation when bookings endpoint is scheduled for next sprint
         setConfirmation({
           id: Date.now(),
           spaceName: selectedSpace?.name || `Space #${spaceId}`,
@@ -108,27 +107,30 @@ export default function SpaceBookingPage() {
   };
 
   return (
-    <div className="mx-auto max-w-2xl space-y-6">
-      <section className="rounded-2xl bg-purple-700 p-8 text-white shadow-sm">
-        <span className="inline-block rounded-full bg-purple-950/50 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-purple-100">
-          Study &amp; Collaboration Spaces
-        </span>
-        <h1 className="mt-3 text-3xl font-bold tracking-tight">
-          Reserve a Library Space
+    <div className="mx-auto max-w-2xl space-y-5">
+      <section className="rounded-xl bg-[#001B5E] p-7 text-white shadow-sm">
+        <div className="flex items-center gap-2.5">
+          <span className="h-[2px] w-6 bg-[#D9A528]" />
+          <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#D9A528]">
+            Study &amp; Collaboration Spaces
+          </span>
+        </div>
+        <h1 className="mt-2.5 text-2xl font-bold tracking-tight sm:text-3xl">
+          Reserve a library <span className="text-[#D9A528]">space.</span>
         </h1>
-        <p className="mt-2 text-base font-normal text-purple-100">
+        <p className="mt-1.5 text-xs font-normal leading-relaxed text-slate-200">
           Select a study room or pod, choose your preferred date, and set your session hours.
         </p>
       </section>
 
       <form
         onSubmit={handleSubmit}
-        className="space-y-5 rounded-2xl border border-purple-200 bg-white p-8 shadow-sm"
+        className="space-y-4 rounded-xl border border-slate-200 bg-white p-7 shadow-sm"
       >
         {error && (
           <div
             role="alert"
-            className="rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-medium text-rose-800"
+            className="rounded-lg border border-rose-200 bg-rose-50 px-3.5 py-2.5 text-xs font-medium text-rose-800"
           >
             {error}
           </div>
@@ -137,9 +139,9 @@ export default function SpaceBookingPage() {
         {confirmation && (
           <div
             role="status"
-            className="rounded-xl border border-purple-300 bg-purple-50 p-4 text-sm text-purple-950"
+            className="rounded-lg border border-[#D9A528] bg-amber-50/70 p-4 text-xs text-slate-900"
           >
-            <p className="font-bold text-purple-900">
+            <p className="font-bold text-[#001B5E]">
               Space Reservation Confirmed
             </p>
             <p className="mt-1">
@@ -154,7 +156,7 @@ export default function SpaceBookingPage() {
         <div>
           <label
             htmlFor="space-select"
-            className="block text-sm font-semibold text-purple-950"
+            className="block text-xs font-semibold text-[#001B5E]"
           >
             Select Space
           </label>
@@ -163,7 +165,7 @@ export default function SpaceBookingPage() {
             name="spaceId"
             value={spaceId}
             onChange={(e) => setSpaceId(e.target.value)}
-            className="mt-1.5 w-full rounded-xl border border-purple-300 bg-purple-50 px-4 py-3 text-base font-medium text-purple-950 outline-none transition focus:border-purple-700 focus:ring-2 focus:ring-purple-700/20"
+            className="mt-1.5 w-full rounded-lg border border-slate-300 bg-slate-50 px-3.5 py-2.5 text-sm font-medium text-[#001B5E] outline-none transition focus:border-[#001B5E] focus:ring-2 focus:ring-[#001B5E]/15"
           >
             {spaces.map((space) => (
               <option key={space.id} value={String(space.id)}>
@@ -177,7 +179,7 @@ export default function SpaceBookingPage() {
         <div>
           <label
             htmlFor="booking-date"
-            className="block text-sm font-semibold text-purple-950"
+            className="block text-xs font-semibold text-[#001B5E]"
           >
             Date
           </label>
@@ -188,7 +190,7 @@ export default function SpaceBookingPage() {
             required
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="mt-1.5 w-full rounded-xl border border-purple-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition focus:border-purple-700 focus:ring-2 focus:ring-purple-700/20"
+            className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 outline-none transition focus:border-[#001B5E] focus:ring-2 focus:ring-[#001B5E]/15"
           />
         </div>
 
@@ -196,7 +198,7 @@ export default function SpaceBookingPage() {
           <div>
             <label
               htmlFor="start-time"
-              className="block text-sm font-semibold text-purple-950"
+              className="block text-xs font-semibold text-[#001B5E]"
             >
               Start Time
             </label>
@@ -207,14 +209,14 @@ export default function SpaceBookingPage() {
               required
               value={startTime}
               onChange={(e) => setStartTime(e.target.value)}
-              className="mt-1.5 w-full rounded-xl border border-purple-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition focus:border-purple-700 focus:ring-2 focus:ring-purple-700/20"
+              className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 outline-none transition focus:border-[#001B5E] focus:ring-2 focus:ring-[#001B5E]/15"
             />
           </div>
 
           <div>
             <label
               htmlFor="end-time"
-              className="block text-sm font-semibold text-purple-950"
+              className="block text-xs font-semibold text-[#001B5E]"
             >
               End Time
             </label>
@@ -225,7 +227,7 @@ export default function SpaceBookingPage() {
               required
               value={endTime}
               onChange={(e) => setEndTime(e.target.value)}
-              className="mt-1.5 w-full rounded-xl border border-purple-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition focus:border-purple-700 focus:ring-2 focus:ring-purple-700/20"
+              className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 outline-none transition focus:border-[#001B5E] focus:ring-2 focus:ring-[#001B5E]/15"
             />
           </div>
         </div>
@@ -233,7 +235,7 @@ export default function SpaceBookingPage() {
         <div>
           <label
             htmlFor="booking-purpose"
-            className="block text-sm font-semibold text-purple-950"
+            className="block text-xs font-semibold text-[#001B5E]"
           >
             Session Notes (Optional)
           </label>
@@ -244,14 +246,14 @@ export default function SpaceBookingPage() {
             value={purpose}
             onChange={(e) => setPurpose(e.target.value)}
             placeholder="Group study, exam revision, or research"
-            className="mt-1.5 w-full rounded-xl border border-purple-300 bg-white px-4 py-3 text-base text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-purple-700 focus:ring-2 focus:ring-purple-700/20"
+            className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-[#001B5E] focus:ring-2 focus:ring-[#001B5E]/15"
           />
         </div>
 
         <button
           type="submit"
           disabled={submitting}
-          className="w-full rounded-xl bg-purple-700 px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-purple-800 disabled:cursor-not-allowed disabled:bg-purple-400"
+          className="w-full rounded-lg bg-[#001B5E] px-4 py-3 text-xs font-semibold text-white transition hover:bg-[#002885] disabled:cursor-not-allowed disabled:bg-slate-400"
         >
           {submitting ? 'Submitting Reservation...' : 'Confirm Space Booking'}
         </button>
