@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { useReadingList } from '../context/ReadingListContext.jsx';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 export default function BookDetail() {
   const { id } = useParams();
+  const { addBook, removeBook, isInReadingList } = useReadingList();
   const [book, setBook] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -95,16 +97,29 @@ export default function BookDetail() {
       ? book.availableCopies
       : book.totalCopies;
   const genreName = book.genre?.name || 'General Collection';
+  const saved = isInReadingList(book.id);
 
   return (
     <div className="mx-auto max-w-4xl space-y-6">
-      <div>
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <Link
           to="/"
           className="inline-flex items-center gap-2 rounded-xl border border-purple-200 bg-white px-4 py-2.5 text-sm font-semibold text-purple-800 shadow-sm transition hover:bg-purple-700 hover:text-white"
         >
           &larr; Back to Catalog
         </Link>
+
+        <button
+          type="button"
+          onClick={() => (saved ? removeBook(book.id) : addBook(book))}
+          className={`rounded-xl px-5 py-2.5 text-sm font-semibold transition ${
+            saved
+              ? 'bg-purple-700 text-white hover:bg-purple-800'
+              : 'border border-purple-300 bg-white text-purple-900 hover:bg-purple-50'
+          }`}
+        >
+          {saved ? 'Remove from Reading List' : 'Add to Reading List'}
+        </button>
       </div>
 
       <article className="overflow-hidden rounded-2xl border border-purple-200 bg-white shadow-sm">
