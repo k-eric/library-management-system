@@ -8,16 +8,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
-const auth_module_1 = require("./auth/auth.module");
-const genres_module_1 = require("./genres/genres.module");
-const books_module_1 = require("./books/books.module");
 const prisma_module_1 = require("./prisma/prisma.module");
+const auth_module_1 = require("./auth/auth.module");
+const books_module_1 = require("./books/books.module");
+const genres_module_1 = require("./genres/genres.module");
+const borrow_requests_module_1 = require("./borrow-requests/borrow-requests.module");
+const bookings_module_1 = require("./bookings/bookings.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [prisma_module_1.PrismaModule, auth_module_1.AuthModule, genres_module_1.GenresModule, books_module_1.BooksModule],
+        imports: [
+            prisma_module_1.PrismaModule,
+            auth_module_1.AuthModule,
+            books_module_1.BooksModule,
+            genres_module_1.GenresModule,
+            borrow_requests_module_1.BorrowRequestsModule,
+            bookings_module_1.BookingsModule,
+        ],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map
