@@ -8,6 +8,7 @@ import LoginPage from './pages/LoginPage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
 import SpaceBookingPage from './pages/SpaceBookingPage.jsx';
 import ReadingListPage from './pages/ReadingListPage.jsx';
+import AdminDashboardPage from './pages/AdminDashboardPage.jsx';
 
 export default function App() {
   return (
@@ -34,6 +35,14 @@ export default function App() {
               element={
                 <ProtectedRoute>
                   <SpaceBookingPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute>
+                  <AdminDashboardPage />
                 </ProtectedRoute>
               }
             />

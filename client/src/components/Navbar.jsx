@@ -45,6 +45,10 @@ export default function Navbar() {
             Catalog
           </Link>
 
+          <Link to="/admin" className={navLinkClass('/admin')}>
+            Admin
+          </Link>
+          
           <Link to="/reading-list" className={navLinkClass('/reading-list')}>
             <span>Reading List</span>
             <span

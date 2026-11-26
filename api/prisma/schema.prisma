@@ -12,36 +12,52 @@ enum Role {
   PATRON
 }
 
+enum BorrowStatus {
+  PENDING
+  APPROVED
+  RETURNED
+  REJECTED
+}
+
+enum BookingStatus {
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  password  String
-  name      String?
-  role      Role     @default(PATRON)
-  reviews   Review[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id             String         @id @default(uuid())
+  email          String         @unique
+  password       String
+  name           String?
+  role           Role           @default(PATRON)
+  reviews        Review[]
+  borrowRequests BorrowRequest[]
+  bookings       Booking[]
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
 }
 
 model Genre {
-  id    String @id @default(uuid())
-  name  String @unique
+  id          String  @id @default(uuid())
+  name        String  @unique
   description String?
-  books Book[]
+  books       Book[]
 }
 
 model Book {
-  id            String   @id @default(uuid())
-  title         String
-  author        String
-  isbn          String   @unique
-  totalCopies   Int      @default(1)
-  publishedYear Int
-  genreId       String
-  genre         Genre    @relation(fields: [genreId], references: [id], onDelete: Cascade)
-  reviews       Review[]
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id             String         @id @default(uuid())
+  title          String
+  author         String
+  isbn           String         @unique
+  totalCopies    Int            @default(1)
+  publishedYear  Int
+  genreId        String
+  genre          Genre          @relation(fields: [genreId], references: [id], onDelete: Cascade)
+  reviews        Review[]
+  borrowRequests BorrowRequest[]
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
 }
 
 model Review {
@@ -53,4 +69,42 @@ model Review {
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
+}
+
+model BorrowRequest {
+  id         String       @id @default(uuid())
+  userId     String
+  user       User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bookId     String
+  book       Book         @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  status     BorrowStatus @default(PENDING)
+  dueDate    DateTime?
+  returnedAt DateTime?
+  fineAmount Float        @default(0)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+}
+
+model Space {
+  id          String    @id @default(uuid())
+  name        String    @unique
+  capacity    Int       @default(1)
+  description String?
+  bookings    Booking[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Booking {
+  id        String        @id @default(uuid())
+  userId    String
+  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  spaceId   String
+  space     Space         @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+  date      DateTime
+  startTime DateTime
+  endTime   DateTime
+  status    BookingStatus @default(CONFIRMED)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
 }
